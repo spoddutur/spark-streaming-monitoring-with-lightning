@@ -84,5 +84,5 @@ lightningServerUrl=http://localhost:3000
 ```
 
 ##  6.References
-- [SocketStream word count referred from spark guide](https://spark.apache.org/docs/latest/streaming-programming-guide.html)
+- [Spark guide on socket streaming word count](https://spark.apache.org/docs/latest/streaming-programming-guide.html)
 - [Lightning Viz](http://lightning-viz.org/usage/#creating)
