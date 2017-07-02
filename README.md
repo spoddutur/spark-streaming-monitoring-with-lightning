@@ -7,11 +7,11 @@ ApacheSpark 2.x streaming application with Dataset’s is not supporting ```stre
 
 There are 3 components in this project:
 1. **SparkApplication:** Spark application receives streaming data from a socket stream and it does simple job of word count.
-2. **Lightning Server:** Plots a graph of ```processing time taken per batch``` and ```number of records per batch``` in real-time which gets updated as and when a new batch of input is processed by spark application
-3. **StreamingListener:** Registered a custom streaming listener to handle onBatchComplete() event where we post to LightningServer.
+2. **Lightning Server:** Plots live-stats of ```processing time taken per batch``` and ```number of records per batch``` params as graph
+3. **StreamingListener:** Registered a custom streaming listener to post **live-stats** to LightningServer.
 
 ## 2. RunningExample
-Following picture depicts side-by-side view of spark-metrics page and its corresponding **```processing time taken per batch``` and ```number of records per batch```** plotted live
+Following picture depicts side-by-side view of spark-metrics page and its corresponding **```processing time taken per batch``` and ```number of records per batch```** params graph plotted live
 ![Running example](https://user-images.githubusercontent.com/22542670/27770239-5e636fa6-5f58-11e7-8b72-28470de103dd.png)
 
 ## 3. Building
@@ -23,13 +23,12 @@ $ mvn clean install
 ## 4. Pre-execution
 ### 4.1. Lightning Graph Server
 First of all, the application depends on Lightning Graph Server.
-The default server is http://localhost:3000. You can [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/lightning-viz/lightning/tree/v1.2.1) or [Install](#lightning) on your machine. Good part is installing it is very simple (kinda one-click process).
+The default server is http://localhost:3000. You can [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/lightning-viz/lightning/tree/v1.2.1) or [Install](#lightning) on your machine. Good part, is installing it is very simple (kinda one-click process).
 
 ## 5. Execution
-Once lightning server is up & running, We can start our spark application in either of the 2 ways listed below.
-First of all, there are 2 ways to execute the application:
+Once lightning server is up & running, We can start our spark application in either of the 2 ways listed below:
 
-1. **Standalone jar**
+1. **standalone jar**
 ```sh
 $ scala -extdirs “$SPARK_HOME/lib" <path-to-spark-streaming-monitoring-with-lightning.jar> --master <master> <cmd-line-args>
 ```
@@ -40,15 +39,15 @@ $ spark-submit --master <master> <path-to-spark-streaming-monitoring-with-lightn
 ```
 Default value for master is local[2].
 
-### 5.1 <cmd-line-args>
+### 5.1 cmd-line-args
 Optionally, you can provide configuration params like lightning server url etc from command line.
 To see the list of configurable params, just type:
 ```sh
-$ <SUBMIT-COMMAND> --help
+$ spark-submit <path-to-spark-streaming-monitoring-with-lightning.jar> --help
 OR
-<SUBMIT-COMMAND> -h
+scala -extdirs “$SPARK_HOME/lib" <path-to-spark-streaming-monitoring-with-lightning.jar> -h
 ```
-It'll look something like this:
+Help content will look something like this:
 ```markdown
 This is a Spark Streaming application which receives data from SocketStream and does word count.
 You can monitor batch size and batch processing time by real-time graph that's rendered using
@@ -67,7 +66,10 @@ Usage: spark-submit realtime-spark-monitoring-with-lightning*.jar [options]
 ```
 
 ### 5.2. File configuration
-Default values for all the options available from command-line are also present in configuration file. You can directly tweak the file instead of submitting it every time from run/submit command. You can find config file at **/src/main/resources/dev/application.properties**. Once you finish tweaking the default, just do mvn build and run. Following lists the params listed in the file:
+Default values for all the options available from command-line are also present in configuration file. 
+You can directly tweak the file instead of submitting it every time from run/submit command.
+You can find config file at **/src/main/resources/dev/application.properties**. 
+Following lists the params listed in the file:
 ```ini
 ...
 sparkMaster=local[2]
