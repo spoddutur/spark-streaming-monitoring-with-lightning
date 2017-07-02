@@ -7,7 +7,7 @@ ApacheSpark 2.x streaming application with Dataset’s is not supporting ```stre
 
 ### 1.1 Architecture:
 There are 3 main components in this project as shown in the picture below:
-![image](https://user-images.githubusercontent.com/22542670/27772180-9241ccba-5f7a-11e7-8400-c2e047e53016.png)
+![image](https://user-images.githubusercontent.com/22542670/27772206-f161509e-5f7a-11e7-907c-9d9b971cabe1.png)
 1. **SparkApplication:** Spark application receives streaming data from a socket stream and it does simple job of word count.
 2. **Lightning Server:** Plots live-stats of ```processing time taken per batch``` and ```number of records per batch``` params as graph
 3. **StreamingListener:** Registered a custom streaming listener to post **live-stats** to LightningServer.
