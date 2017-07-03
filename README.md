@@ -1,6 +1,6 @@
 # spark-streaming-monitoring-with-lightning
 - Real-time Spark Stream Monitoring over SocketStream.
-- Using Apache Spark and Lightning Graph server. 
+- Using [Apache Spark](#apachespark) and [Lightning Graph server](#lightning-viz). 
 
 ## 1. Background:
 ApacheSpark 2.x streaming application with Dataset’s is not supporting ```streaming``` tab now. This project shows how to have a realtime graph monitoring system using Lightning-viz where we can plot and monitor any custom param that we need.
@@ -9,7 +9,7 @@ ApacheSpark 2.x streaming application with Dataset’s is not supporting ```stre
 There are 3 main components in this project as shown in the picture below:
 ![image](https://user-images.githubusercontent.com/22542670/27772206-f161509e-5f7a-11e7-907c-9d9b971cabe1.png)
 1. **SparkApplication:** Spark application receives streaming data from a socket stream and it does simple job of word count.
-2. **Lightning Server:** Plots live-stats of ```processing time taken per batch``` and ```number of records per batch``` params as graph
+2. **Lightning Server:** Plots live-stats of any custom params that user wants to monitor within his spark application real-time.
 3. **StreamingListener:** Registered a custom streaming listener to post **live-stats** to LightningServer.
 
 ## 2. RunningExample
